@@ -1,0 +1,11 @@
+{
+    "dimensions": {
+        "store_id": {
+            "type": "string",
+            "select": "s.store_id",
+            "where": "s.store_id = {{dimension.value}}",
+            "join": "LEFT JOIN stores s ON s.store_id = t.store_id",
+            "groupBy": "s.store_id"
+        }
+    }
+}

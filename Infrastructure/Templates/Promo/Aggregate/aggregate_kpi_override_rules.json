@@ -1,0 +1,38 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "description": "Override rules for aggregate kpis",
+    "lastUpdated": "2025-04-13"
+  },
+  "rules": [
+    {
+      "name": "cSetOrUOverride",
+      "description": "Convert aggregate kpis to nonaggregate when cS or cU filters are applied",
+      "condition": "{{ filterBy.cSet.size > 0 || filterBy.cU.size > 0 }}",
+      "actions": {
+        "overridesAtKpiGroupLevel": {
+          "properties": {
+            "kpiGroup": "nonaggregate",
+            "kpiTemplate": "nonaggregate_kpi_template.sbn",
+            "defaultBaseTableSchema": "TEST",
+            "defaultBaseTable": "TXN.UPC_STR"
+          }
+        },
+        "overridesAtKpiLevel": [
+          {
+            "kpiName": "profit",
+            "properties": {
+              "kpiFormula": "SUM({{ baseTableAlias }}.PROFIT) AS profit"
+            }
+          },
+          {
+            "kpiName": "units_ty",
+            "properties": {
+              "kpiFormula": "SUM({{ baseTableAlias }}.TOT_QTY) AS units"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

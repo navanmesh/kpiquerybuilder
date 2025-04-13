@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGTESTp>
+    <TargetFramework>net9.0</TargetFramework>
+  </PropertyGTESTp>
+
+</Project>
