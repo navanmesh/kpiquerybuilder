@@ -1,0 +1,34 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "description": "Kpi definitions for the Promo domain",
+    "lastUpdated": "2025-04-13"
+  },
+  "kpis": [
+    {
+      "kpiName": "profit",
+      "type": "base",
+      "metadata": {
+        "description": "This Year's Profit Amount"
+      },
+      "kpiFormula": "{{ baseTableAlias }}.PROFIT AS profit",
+      "kpiGroup": "aggregate",
+      "kpiTemplate": "aggregate_kpi_template.sbn",
+      "defaultBaseTableSchema": "TEST",
+      "defaultBaseTable": "TEST_TABLE"
+    },
+    {
+      "kpiName": "loss",
+      "type": "base",
+      "metadata": {
+        "description": "Thiss Year's Loss Amount'",
+        "category": "inventory"
+      },
+      "kpiFormula": "{{ baseTableAlias }}.Loss AS loss",
+      "kpiGroup": "aggregate",
+      "kpiTemplate": "aggregate_kpi_template.sbn",
+      "defaultBaseTableSchema": "TEST",
+      "defaultBaseTable": "TEST_TABLE"
+    }
+  ]
+}

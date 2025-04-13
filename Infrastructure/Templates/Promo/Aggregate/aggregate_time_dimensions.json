@@ -1,0 +1,39 @@
+{
+    "dimensions": {
+        "date": {
+            "type": "datetime",
+            "select": "DATE(t.transaction_date) as date",
+            "where": "t.transaction_date BETWEEN '{{dimension.value.start}}' AND '{{dimension.value.end}}'",
+            "join": "",
+            "groupBy": "DATE(t.transaction_date)"
+        },
+        "fc_week": {
+            "type": "integer",
+            "select": "tw.fc_week",
+            "where": "tw.fc_week = {{dimension.value}}",
+            "join": "LEFT JOIN time_weekly tw ON tw.date = t.transaction_date",
+            "groupBy": "tw.fc_week"
+        },
+        "fc_period": {
+            "type": "integer",
+            "select": "tp.fc_period",
+            "where": "tp.fc_period = {{dimension.value}}",
+            "join": "LEFT JOIN time_period tp ON tp.date = t.transaction_date",
+            "groupBy": "tp.fc_period"
+        },
+        "calendar_month": {
+            "type": "string",
+            "select": "DATE_FORMAT(t.transaction_date, '%Y-%m') as calendar_month",
+            "where": "DATE_FORMAT(t.transaction_date, '%Y-%m') = '{{dimension.value}}'",
+            "join": "",
+            "groupBy": "DATE_FORMAT(t.transaction_date, '%Y-%m')"
+        },
+        "calendar_year": {
+            "type": "integer",
+            "select": "YEAR(t.transaction_date) as calendar_year",
+            "where": "YEAR(t.transaction_date) = {{dimension.value}}",
+            "join": "",
+            "groupBy": "YEAR(t.transaction_date)"
+        }
+    }
+}

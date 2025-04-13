@@ -1,0 +1,41 @@
+SELECT DISTINCT
+    {{- capture group_by_items -}}
+        {{- for group in group_by -}}
+            {{- if dimensions[group] != null -}}
+                {{ dimensions[group].select }};;
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+    {{- for item in group_by_items | string.split ';;' | array.compact }}
+        {{- if !for.first }}, {{ end }}{{ item }}
+    {{- end -}}
+    {{- if kpis != empty }}, {{ end -}}
+    {{- for kpi in kpis -}}
+        {{- if !for.first }}, {{ end }}
+        {{ kpi.value.expression }} as {{ kpi.key }}
+    {{- end }}
+FROM {{ from_table }}
+    {{- for dimension in dimensions -}}
+        {{- if dimension.value.join != "" -}}
+            {{ dimension.value.join }};;
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- for join in distinct_joins | string.split ';;' | array.uniq }}
+    {{- if join != "" }}
+    {{ join }}
+    {{- end -}}
+{{- end }}
+WHERE 1=1
+{{- for dimension in dimensions -}}
+    {{- if dimension.value.value != null }}
+    AND {{ dimension.value.where | string.replace '{{dimension.value}}' dimension.value.value }}
+    {{- end -}}
+{{- end }}
+{{- if group_by != null && group_by != empty }}
+GROUP BY
+    {{ for group in group_by }}
+        {{- if !for.first -}}, {{- end -}}
+        {{- if dimensions[group] != null -}} {{- dimensions[group].group_by -}} {{- end -}}
+    {{ end }}
+{{- end }}

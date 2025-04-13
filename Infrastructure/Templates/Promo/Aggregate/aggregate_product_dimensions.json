@@ -1,0 +1,81 @@
+{
+    "dimensions": {
+        "l0_id": {
+            "type": "integer",
+            "select": "ph.l0_id",
+            "where": "ph.l0_id = {{dimension.value}}",
+            "join": "LEFT JOIN product_hierarchy ph ON ph.product_id = t.product_id",
+            "groupBy": "ph.l0_id"
+        },
+        "l1_id": {
+            "type": "integer",
+            "select": "ph.l1_id",
+            "where": "ph.l1_id = {{dimension.value}}",
+            "join": "LEFT JOIN product_hierarchy ph ON ph.product_id = t.product_id",
+            "groupBy": "ph.l1_id"
+        },
+        "l2_id": {
+            "type": "integer",
+            "select": "ph.l2_id",
+            "where": "ph.l2_id = {{dimension.value}}",
+            "join": "LEFT JOIN product_hierarchy ph ON ph.product_id = t.product_id",
+            "groupBy": "ph.l2_id"
+        },
+        "l3_id": {
+            "type": "integer",
+            "select": "ph.l3_id",
+            "where": "ph.l3_id = {{dimension.value}}",
+            "join": "LEFT JOIN product_hierarchy ph ON ph.product_id = t.product_id",
+            "groupBy": "ph.l3_id"
+        },
+        "l4_id": {
+            "type": "integer",
+            "select": "ph.l4_id",
+            "where": "ph.l4_id = {{dimension.value}}",
+            "join": "LEFT JOIN product_hierarchy ph ON ph.product_id = t.product_id",
+            "groupBy": "ph.l4_id"
+        },
+        "l5_id": {
+            "type": "integer",
+            "select": "ph.l5_id",
+            "where": "ph.l5_id = {{dimension.value}}",
+            "join": "LEFT JOIN product_hierarchy ph ON ph.product_id = t.product_id",
+            "groupBy": "ph.l5_id"
+        },
+        "l6_id": {
+            "type": "integer",
+            "select": "ph.l6_id",
+            "where": "ph.l6_id = {{dimension.value}}",
+            "join": "LEFT JOIN product_hierarchy ph ON ph.product_id = t.product_id",
+            "groupBy": "ph.l6_id"
+        },
+        "l7_id": {
+            "type": "integer",
+            "select": "ph.l7_id",
+            "where": "ph.l7_id = {{dimension.value}}",
+            "join": "LEFT JOIN product_hierarchy ph ON ph.product_id = t.product_id",
+            "groupBy": "ph.l7_id"
+        },
+        "l8_id": {
+            "type": "integer",
+            "select": "ph.l8_id",
+            "where": "ph.l8_id = {{dimension.value}}",
+            "join": "LEFT JOIN product_hierarchy ph ON ph.product_id = t.product_id",
+            "groupBy": "ph.l8_id"
+        },
+        "l9_id": {
+            "type": "integer",
+            "select": "ph.l9_id",
+            "where": "ph.l9_id = {{dimension.value}}",
+            "join": "LEFT JOIN product_hierarchy ph ON ph.product_id = t.product_id",
+            "groupBy": "ph.l9_id"
+        },
+        "product_group": {
+            "type": "string",
+            "select": "pg.group_name as product_group",
+            "where": "pg.group_name IN ({{dimension.value | array.join ','}})",
+            "join": "LEFT JOIN product_groups pg ON pg.product_id = t.product_id",
+            "groupBy": "pg.group_name"
+        }
+    }
+}
